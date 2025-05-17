@@ -11,22 +11,22 @@ export const Roles = (...roles: UserRoleId[]) => SetMetadata(ROLES_KEY, roles);
 
 export class MetaDataResponse {
   @ApiProperty({ description: 'Total of products' })
-  total: number;
+  total!: number;
 
   @ApiProperty({ description: 'Products per page' })
-  per_page: number;
+  per_page!: number;
 
   @ApiProperty({ description: 'Current page' })
-  current_page: number;
+  current_page!: number;
 
   @ApiProperty({ description: 'Last page' })
-  last_page: number;
+  last_page!: number;
 
   @ApiProperty({ nullable: true, description: 'Next page URL' })
-  next_page_url: string | null;
+  next_page_url!: string | null;
 
   @ApiProperty({ nullable: true, description: 'Previous page URL' })
-  prev_page_url: string | null;
+  prev_page_url!: string | null;
 }
 
 export class FiltroBaseDto {

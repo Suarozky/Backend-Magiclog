@@ -8,34 +8,45 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   JoinColumn,
+  OneToMany,
+  OneToOne,
   ManyToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Role } from './role.entity';
+import { Cart } from './cart.entity';
+import { Product } from './product.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ unique: true })
-  email: string;
+  email!: string;
 
   @Column()
-  password: string;
+  password!: string;
 
   @ManyToOne(() => Role, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'roleId' })
-  role: Role;
+  role!: Role;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
+  created_at!: Date;
+
+  @OneToMany(() => Product, (product) => product.user)
+  products!: Product[];
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date;
+  updated_at!: Date;
 
   @DeleteDateColumn({ type: 'timestamp', nullable: true })
-  deleted_at: Date;
+  deleted_at!: Date;
+
+  @OneToOne(() => Cart, (cart) => cart.user, { cascade: true })
+  @JoinColumn()
+  cart!: Cart;
 
   @BeforeInsert()
   async hashPassword() {

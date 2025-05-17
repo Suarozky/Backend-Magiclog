@@ -1,8 +1,9 @@
-// src/database/postgres/typeorm.ts
 import { DataSource } from 'typeorm';
 import { getDatabaseConfig } from './postgres.config';
+import { EnvConfig } from '../../config/env.config'; 
 
 console.log('🧪 EnvConfig:', getDatabaseConfig());
+console.log('🛠️ isProduction:', EnvConfig.isProduction);
 
-// ⚠️ Aquí el export debe ser "default"
+// ⚠️ Export statement should be last
 export default new DataSource(getDatabaseConfig());

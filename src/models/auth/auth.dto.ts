@@ -13,7 +13,7 @@ export class RegisterDto {
   @ApiProperty({ description: 'The email of the user' })
   @IsEmail({}, { message: 'Invalid email format' })
   @IsNotEmpty({ message: 'Email is required' })
-  email: string;
+  email!: string;
 
   @ApiProperty({ description: 'The password of the user' })
   @IsString()
@@ -27,7 +27,7 @@ export class RegisterDto {
     minLowercase: 1,
     minSymbols: 1,
   })
-  password: string;
+  password!: string;
 
   @ApiProperty({
     description: 'The role of the user',
@@ -41,7 +41,7 @@ export class RegisterDto {
 export class LoginDto {
   @ApiProperty({ description: 'The email of the user' })
   @IsEmail({}, { message: 'Invalid email format' })
-  email: string;
+  email!: string;
 
   @ApiProperty({ description: 'The password of the user' })
   @IsString()
@@ -53,13 +53,13 @@ export class LoginDto {
     minLowercase: 1,
     minSymbols: 1,
   })
-  password: string;
+  password!: string;
 }
 
 export class RoleDto {
   @ApiProperty()
-  id: number;
+  id!: number;
 
   @ApiProperty()
-  name: string;
+  name!: string;
 }

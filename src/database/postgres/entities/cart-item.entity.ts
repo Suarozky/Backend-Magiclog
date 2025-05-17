@@ -1,30 +1,31 @@
-
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
 } from 'typeorm';
+import { Cart } from './cart.entity';
+import { Product } from './product.entity';
 
 @Entity()
-export class Role {
+export class CartItem {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  name!: string;
+  @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
+  cart!: Cart;
+
+  @ManyToOne(() => Product, { nullable: false })
+  product!: Product;
 
   @Column()
-  description!: string;
+  quantity!: number;
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at!: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at!: Date;
-
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
-  deleted_at!: Date;
 }

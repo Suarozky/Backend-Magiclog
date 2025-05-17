@@ -11,7 +11,9 @@ async function bootstrap() {
   // Habilitar CORS
   app.enableCors({
     origin: [
-      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://frontend-magic-log.vercel.app'
+      
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permitir cookies si es necesario

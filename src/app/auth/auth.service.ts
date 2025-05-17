@@ -90,7 +90,7 @@ export class AuthService {
       await this.userRepository.save(newUser);
     } catch (error) {
       // 5. Manejo de errores si la inserción falla (por ejemplo, errores de la base de datos)
-      throw new BadRequestException('Error creating user: ' + error.message);
+      throw new BadRequestException('Error creating user: ' );
     }
 
     // 6. Eliminar la contraseña del objeto de respuesta antes de devolverlo
@@ -151,7 +151,7 @@ export class AuthService {
     } catch (error) {
       throw new UnauthorizedException(
         'Invalid or expired refresh token.',
-        error,
+       
       );
     }
   }

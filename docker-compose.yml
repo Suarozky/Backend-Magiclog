@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres  # Añade un nombre de BD predeterminado
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:  # Añade healthcheck para verificar cuando la BD está lista
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: johanjimenez0210@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: johanyjhn1212
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:  # Añade tu servicio de aplicación Node.js
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules  # Evita sobrescribir node_modules
+    command: sh -c "npm run migration:run && npm run start:dev"
+
+volumes:
+  db:
+    driver: local
+  cache:
+    driver: local

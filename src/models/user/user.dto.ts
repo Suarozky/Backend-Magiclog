@@ -10,13 +10,13 @@ import { Type } from 'class-transformer';
 
 export class UserProfileDto {
   @ApiProperty()
-  id: number;
+  id: number | undefined;
 
   @ApiProperty()
-  email: string;
+  email: string | undefined;
 
   @ApiProperty({ type: () => RoleDto })
-  role: RoleDto;
+  role: RoleDto | undefined;
 }
 
 export class UserProfileFiltersDto extends FiltroBaseDto {
@@ -40,8 +40,8 @@ export class UserProfileFiltersDto extends FiltroBaseDto {
 
 export class ListaUsuariosResponse {
   @ApiProperty({ type: () => UserProfileDto, isArray: true })
-  users: UserProfileDto[];
+  users: UserProfileDto[] | undefined;
 
   @ApiProperty()
-  meta: MetaDataResponse;
+  meta: MetaDataResponse | undefined;
 }

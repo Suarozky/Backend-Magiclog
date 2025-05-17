@@ -1,5 +1,6 @@
+import { type } from "os";
 
-interface jwtPayload {
+type jwtPayload = {
   id: string;
   email: string;
   sub: string;

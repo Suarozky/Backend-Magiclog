@@ -1,23 +1,27 @@
-
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
+import { User } from './user.entity';
+import { CartItem } from './cart-item.entity';
 
 @Entity()
-export class Role {
+export class Cart {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  name!: string;
+  @OneToOne(() => User, (user) => user.cart, { onDelete: 'CASCADE' })
+  user!: User;
 
-  @Column()
-  description!: string;
+  @OneToMany(() => CartItem, (cartItem) => cartItem.cart, {
+    cascade: true,
+  })
+  items!: CartItem[];
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at!: Date;
