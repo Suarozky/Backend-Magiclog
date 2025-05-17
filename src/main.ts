@@ -43,7 +43,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, documentFactory);
 
   // Usar el puerto desde las variables de entorno
-  const port = process.env.PORT || EnvConfig.port || 3100;
+  const port = process.env.APP_PORT || EnvConfig.port || 3100;
 await app.listen(port);
 console.log(`Server is running on: ${port}`); // ¡Usa backticks (`)!
 }
