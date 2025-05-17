@@ -43,7 +43,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, documentFactory);
 
   // Usar el puerto desde las variables de entorno
-  await app.listen(EnvConfig.port);
+  await app.listen(EnvConfig.port || 3100);
 }
 
 bootstrap();
