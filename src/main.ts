@@ -44,6 +44,7 @@ async function bootstrap() {
 
   // Usar el puerto desde las variables de entorno
   await app.listen(EnvConfig.port || 3100);
+  console.log(`Server is running on: ${EnvConfig.port || 3100}`);
 }
 
 bootstrap();
